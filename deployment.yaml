@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-converter
+spec:
+  selector:
+    matchLabels:
+      name: lbl-api-converter
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: lbl-api-converter
+    spec:
+      containers:
+      - name: api-converter
+        image: wesleyhinsch/converter:v1.0.0
+        imagePullPolicy: Always
+        ports:
+        - name: api-converter
+          containerPort: 8080
+          protocol: TCP
+      imagePullSecrets:
+        - name: api-converter
